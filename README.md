@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/eliaskousk/conan-nl-json.svg?branch=release/2.0.9)](https://travis-ci.org/eliaskousk/conan-nl-json)
+
 # conan-nl-json
 
 Simple conan package for the header-only "JSON for modern C++" library by Niels Lohmann (https://github.com/nlohmann/json).
