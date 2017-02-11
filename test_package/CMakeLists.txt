@@ -1,9 +1,25 @@
-PROJECT(MyHello)
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required( VERSION  3.0 )
 
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-CONAN_BASIC_SETUP()
+project( JsonPackageTest
+         VERSION       0.0.1
+         LANGUAGES     C  CXX
+)
 
-ADD_EXECUTABLE(mytest test.cpp)
-TARGET_LINK_LIBRARIES(mytest ${CONAN_LIBS})
-set_property(TARGET mytest PROPERTY CXX_STANDARD 11)
+# set c++ std version
+set( CMAKE_CXX_STANDARD  14 )
+# don't fail if c++14 is not available
+set( CMAKE_CXX_STANDARD_REQUIRED  OFF )
+# disable compiler-specific extensions
+set( CMAKE_CXX_EXTENSIONS  OFF )
+
+include( "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake" )
+conan_basic_setup( TARGETS )
+# supress cmake warnings about unused variables that conan passes in
+set( _ignore_me  ${CONAN_EXPORTED} )
+
+add_executable( JsonPackageTest
+    main.cpp
+)
+target_link_libraries( JsonPackageTest
+    PRIVATE  CONAN_PKG::json
+)
