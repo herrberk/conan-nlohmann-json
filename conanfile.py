@@ -6,7 +6,7 @@ class NlohmannJsonConan(ConanFile):
     version = '2.1.0'
     description = 'JSON for Modern C++.'
     url = 'https://github.com/jjones646/conan-nlohmann-json'
-    license = 'https://github.com/nlohmann/json/blob/v{!s}/LICENSE.MIT'.format(version)
+    license = 'https://github.com/nlohmann/json/blob/v2.1.0/LICENSE.MIT'
     settings = None
     options = { 'no_exceptions': [True, False] }
     default_options = 'no_exceptions=False'
