@@ -1,7 +1,7 @@
 from conan.packager import ConanMultiPackager
 import os
 
-username = os.getenv('CONAN_USERNAME', 'keysight')
+username = os.getenv('CONAN_USERNAME', 'ksf')
 os.environ['CONAN_USERNAME'] = username
 channel = os.getenv('CONAN_CHANNEL', 'stable')
 os.environ['CONAN_CHANNEL'] = channel
