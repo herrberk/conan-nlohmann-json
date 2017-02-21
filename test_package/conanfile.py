@@ -1,12 +1,11 @@
 from conans import ConanFile, CMake
 import os
 
-username = os.getenv('CONAN_USERNAME', 'ksf')
+username = os.getenv('CONAN_USERNAME', 'jjones646')
 os.environ['CONAN_USERNAME'] = username
 channel = os.getenv('CONAN_CHANNEL', 'testing')
 os.environ['CONAN_CHANNEL'] = channel
-log_run = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
-os.environ['CONAN_LOG_RUN_TO_FILE'] = log_run
+os.environ['CONAN_LOG_RUN_TO_FILE'] = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
 
 class NlohmannJsonConanPackageTest(ConanFile):
     settings =  {
