@@ -1,42 +1,25 @@
 from conan.packager import ConanMultiPackager
 import os
 
-username = os.getenv('CONAN_USERNAME', 'ksf')
-os.environ['CONAN_USERNAME'] = username
-channel = os.getenv('CONAN_CHANNEL', 'stable')
-os.environ['CONAN_CHANNEL'] = channel
-log_run = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
-os.environ['CONAN_LOG_RUN_TO_FILE'] = log_run
+os.environ['CONAN_USERNAME'] = os.getenv('CONAN_USERNAME', 'jjones646')
+os.environ['CONAN_CHANNEL'] = os.getenv('CONAN_CHANNEL', 'stable')
+os.environ['CONAN_LOG_RUN_TO_FILE'] = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
 
-if __name__ == "__main__":
+def get_builds_with_options(builder):
+    builds = []
+    for settings, options in builder.builds:
+        builds.append([settings, {'json:no_exceptions':True}])
+        builds.append([settings, {'json:no_exceptions':False}])
+    return builds
+
+if __name__ == '__main__':
     builder = ConanMultiPackager(
-        args='-o json:no_exceptions=False',
-        gcc_versions=['4.9', '5.2', '5.3', '5.4'],
+        gcc_versions=['5.2', '5.3', '5.4', '6.2'],
         apple_clang_versions=['6.1', '7.0', '7.3', '8.0'],
         visual_versions=['14'],
-        visual_runtimes=['MT'],
-        archs=['x86_64'],
-        use_docker=False,
-        upload=False,
-        username=username,
-        channel=channel,
+        archs=['x86_64', 'x86'],
         reference='json/2.1.0',
     )
     builder.add_common_builds(pure_c=False)
-    builder.run()
-
-    builder = ConanMultiPackager(
-        args='-o json:no_exceptions=True',
-        gcc_versions=['5.4'],
-        apple_clang_versions=['8.0'],
-        visual_versions=['14'],
-        visual_runtimes=['MT'],
-        archs=['x86_64'],
-        use_docker=False,
-        upload=False,
-        username=username,
-        channel=channel,
-        reference='json/2.1.0',
-    )
-    builder.add_common_builds(pure_c=False)
+    builder.builds = get_builds_with_options(builder)
     builder.run()
