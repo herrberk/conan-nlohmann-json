@@ -14,7 +14,7 @@ class NlohmannJsonConanPackageTest(ConanFile):
                     'arch': None,
                     'build_type': ['Release', 'Debug']
                 }
-    requires = 'json/2.1.0@{!s}/{!s}'.format(username, channel)
+    requires = 'json/2.0.10@{!s}/{!s}'.format(username, channel)
     generators = 'cmake'
     build_policy = 'missing'
 
