@@ -5,6 +5,13 @@ os.environ['CONAN_USERNAME'] = os.getenv('CONAN_USERNAME', 'jjones646')
 os.environ['CONAN_CHANNEL'] = os.getenv('CONAN_CHANNEL', 'stable')
 os.environ['CONAN_LOG_RUN_TO_FILE'] = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
 
+def get_builds_with_options(builder):
+    builds = []
+    for settings, options, env_vars, build_requires in builder.builds:
+        builds.append([settings, {'json:no_exceptions':True}, env_vars, build_requires])
+        builds.append([settings, {'json:no_exceptions':False}, env_vars, build_requires])
+    return builds
+
 if __name__ == '__main__':
     builder = ConanMultiPackager(
         gcc_versions=['5.2', '5.3', '5.4', '6.2'],
