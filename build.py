@@ -7,9 +7,9 @@ os.environ['CONAN_LOG_RUN_TO_FILE'] = os.getenv('CONAN_LOG_RUN_TO_FILE', '1')
 
 def get_builds_with_options(builder):
     builds = []
-    for settings, options in builder.builds:
-        builds.append([settings, {'json:no_exceptions':True}])
-        builds.append([settings, {'json:no_exceptions':False}])
+    for settings, options, env_vars, build_requires in builder.builds:
+        builds.append([settings, {'json:no_exceptions':True}, env_vars, build_requires])
+        builds.append([settings, {'json:no_exceptions':False}, env_vars, build_requires])
     return builds
 
 if __name__ == '__main__':
